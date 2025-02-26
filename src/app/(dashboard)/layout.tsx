@@ -74,7 +74,7 @@ export default function Layout({
             </div>
             <div className="ml-auto flex items-center gap-2">
               <ThemeButton />
-              <Button variant="ghost" className="w-full justify-start gap-2">
+              <Button variant="ghost" className="w-full justify-start gap-2 p-0">
                 <LogOut className="h-5 w-5" />
                 Cerrar sesión
               </Button>
@@ -88,7 +88,7 @@ export default function Layout({
           <aside className="hidden md:flex w-64 flex-col border-r bg-muted/20 min-h-[calc(100vh-3.5rem)]">
             <div className="flex flex-col gap-2 p-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold">Menú</h2>
+                <h2 className="text-lg font-semibold ml-2">Menú</h2>
               </div>
               <nav className="grid gap-1 pt-2">
                 <Button
@@ -115,9 +115,7 @@ export default function Layout({
           </aside>
           {/* Contenido */}
           <main className="flex-1 overflow-auto">
-            <div className="container mx-auto p-4 md:p-6 max-w-7xl">
               {children}
-            </div>
           </main>
         </div>
       </div>
