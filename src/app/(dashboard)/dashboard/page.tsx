@@ -31,8 +31,8 @@ function Dashboard() {
         <TabsDashboard />
         <div>
           <TaskStats
-            totalTasks={28}
-            completedTasks={13}
+            totalTasks={20}
+            completedTasks={12}
             pendingTasks={10}
             highPriorityTasks={10}
           />

@@ -22,16 +22,40 @@ function TabsDashboard() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="all" className="mt-0">
-          
+          {/* <TaskList
+                tasks={filteredTasks}
+                onDelete={deleteTask}
+                onToggleFavorite={toggleFavorite}
+                onToggleCompleted={toggleCompleted}
+                onEdit={editTask}
+              /> */}
         </TabsContent>
         <TabsContent value="high" className="mt-0">
-          
+          {/* <TaskList
+                tasks={filteredTasks}
+                onDelete={deleteTask}
+                onToggleFavorite={toggleFavorite}
+                onToggleCompleted={toggleCompleted}
+                onEdit={editTask}
+              /> */}
         </TabsContent>
         <TabsContent value="medium" className="mt-0">
-          
+          {/* <TaskList
+                tasks={filteredTasks}
+                onDelete={deleteTask}
+                onToggleFavorite={toggleFavorite}
+                onToggleCompleted={toggleCompleted}
+                onEdit={editTask}
+              /> */}
         </TabsContent>
         <TabsContent value="low" className="mt-0">
-          
+          {/* <TaskList
+                tasks={filteredTasks}
+                onDelete={deleteTask}
+                onToggleFavorite={toggleFavorite}
+                onToggleCompleted={toggleCompleted}
+                onEdit={editTask}
+              /> */}
         </TabsContent>
       </Tabs>
     </div>

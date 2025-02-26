@@ -107,11 +107,11 @@ export function TaskStats({
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5">
+      <Card className="bg-gradient-to-br from-indigo-700/5 via-indigo-700/10 to-indigo-700/5">
         <CardContent className="p-6">
           <div className="flex flex-col items-center text-center">
-            <div className="size-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <PencilLine className="h-6 w-6 text-primary" />
+            <div className="size-12 rounded-full bg-indigo-600/10 flex items-center justify-center mb-4">
+              <PencilLine className="h-6 w-6 text-indigo-600" />
             </div>
             <h3 className="text-lg font-medium">Consejos de productividad</h3>
             <p className="text-sm text-muted-foreground mt-2">
