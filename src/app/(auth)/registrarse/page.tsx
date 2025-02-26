@@ -36,9 +36,9 @@ function RegisterPage() {
         </div>
 
         <p className="mt-8 text-center text-sm text-gray-600">
-          ¿Ya tienes una cuenta?
+          ¿Ya tienes una cuenta?{" "}
           <Link
-            href="/inciar-sesion"
+            href="/iniciar-sesion"
             className="font-medium text-indigo-600 hover:text-indigo-800"
           >
             Iniciar Sesión
