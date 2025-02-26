@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, ArrowLeft, Loader } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useFormState } from "react-dom";
 import { ZodErrors } from "../custom/ZodErrors";
 import { ApiErrors } from "../custom/ApiErrors";
 import { loginAction } from "@/data/actions/auth/loginAction";
-import { useFormStatus } from "react-dom";
 import { SubmitButton } from "../custom/SubmitButton";
 
 const INITIAL_STATE = {
@@ -20,9 +19,7 @@ const INITIAL_STATE = {
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [formState, formAction] = useFormState(loginAction, INITIAL_STATE);
-  const status = useFormStatus();
 
   return (
     <form className="space-y-6" action={formAction}>
