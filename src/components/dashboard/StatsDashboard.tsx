@@ -1,7 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { TaskStatsProps } from "@/lib/types/TaskStatsProps";
 import { Calendar, Check, Clock, TriangleAlert } from "lucide-react";
 
-function StatsDashboard() {
+function StatsDashboard({
+  totalTasks,
+  completedTasks,
+  pendingTasks,
+  highPriorityTasks,
+}: TaskStatsProps) {
   return (
     <div className="grid gap-4 md:grid-cols-4 mb-6">
       <Card className="bg-gradient-to-br from-primary/10 to-primary/5">
@@ -10,7 +16,7 @@ function StatsDashboard() {
             <p className="text-sm font-medium text-muted-foreground">
               Total de tareas
             </p>
-            <h3 className="text-2xl font-bold mt-1">2000</h3>
+            <h3 className="text-2xl font-bold mt-1">{totalTasks}</h3>
           </div>
           <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center">
             <Calendar className="h-5 w-5 text-primary" />
@@ -23,7 +29,7 @@ function StatsDashboard() {
             <p className="text-sm font-medium text-muted-foreground">
               Completadas
             </p>
-            <h3 className="text-2xl font-bold mt-1">{2000}</h3>
+            <h3 className="text-2xl font-bold mt-1">{completedTasks}</h3>
           </div>
           <div className="size-10 rounded-full bg-green-500/10 flex items-center justify-center">
             <Check className="h-5 w-5 text-green-500" />
@@ -36,7 +42,7 @@ function StatsDashboard() {
             <p className="text-sm font-medium text-muted-foreground">
               Pendientes
             </p>
-            <h3 className="text-2xl font-bold mt-1">{2000}</h3>
+            <h3 className="text-2xl font-bold mt-1">{pendingTasks}</h3>
           </div>
           <div className="size-10 rounded-full bg-amber-500/10 flex items-center justify-center">
             <Clock className="h-5 w-5 text-amber-500" />
@@ -49,7 +55,7 @@ function StatsDashboard() {
             <p className="text-sm font-medium text-muted-foreground">
               Alta prioridad
             </p>
-            <h3 className="text-2xl font-bold mt-1">{20000}</h3>
+            <h3 className="text-2xl font-bold mt-1">{highPriorityTasks}</h3>
           </div>
           <div className="size-10 rounded-full bg-red-500/10 flex items-center justify-center">
             <TriangleAlert className="h-5 w-5 text-red-500" />

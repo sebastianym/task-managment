@@ -39,7 +39,7 @@ function LoginPage() {
           <p className="mt-8 text-center text-sm text-gray-600">
             ¿No tienes una cuenta?{" "}
             <Link
-              href="/register"
+              href="/registro"
               className="font-medium text-indigo-600 hover:text-indigo-800"
             >
               Regístrate aquí

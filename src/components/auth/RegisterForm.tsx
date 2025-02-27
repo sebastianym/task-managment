@@ -3,11 +3,12 @@ import { SubmitButton } from "@/components/custom/SubmitButton";
 import { ZodErrors } from "@/components/custom/ZodErrors";
 import { registerAction } from "@/data/actions/auth/RegisterAction";
 import { useFormState } from "react-dom";
-import { ApiErrors } from "@/components/custom/ApiErrors";
 import { Input } from "../ui/input";
-import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { Ban, Check, Eye, EyeOff } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 const INITIAL_STATE = {
   apiErrors: null,
@@ -20,6 +21,24 @@ function RegisterForm() {
   const [formState, formAction] = useFormState(registerAction, INITIAL_STATE);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  useEffect(() => {
+    if (formState.apiErrors) {
+      toast(
+        <div className="bg-white text-black flex gap-2 items-center font-semibold">
+          <Ban className="h-5 w-5 text-red-500" /> {formState.apiErrors}
+        </div>
+      );
+    } else if (formState.message === "Registro exitoso") {
+      toast(
+        <div className="bg-white text-black flex gap-2 items-center font-semibold">
+          <Check className="h-5 w-5 text-red-500" /> Usuario registrado
+          correctamente
+        </div>
+      );
+      redirect("/iniciar-sesion");
+    }
+  }, [formState]);
 
   return (
     <form action={formAction} className="space-y-6">
@@ -149,7 +168,6 @@ function RegisterForm() {
           color="blue"
           size="large"
         />
-        <ApiErrors error={formState.apiErrors} />
       </div>
     </form>
   );

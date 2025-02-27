@@ -1,10 +1,7 @@
 "use server";
 
 import { registerService } from "@/data/services/auth/registerService";
-import { config } from "@/lib/config/auth/cookiesConfig";
 import { schemaRegister } from "@/lib/schemas/schemaRegister";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export const registerAction = async (prevState: any, formData: FormData) => {
   let redirectPath: string | null = null;
@@ -70,22 +67,20 @@ export const registerAction = async (prevState: any, formData: FormData) => {
     if (responseData.error) {
       return {
         ...prevState,
-        apiErrors: responseData.error.message,
+        apiErrors: responseData.error,
         zodErrors: null,
         message: "Error al registrar.",
       };
     }
 
-    if (responseData.jwt) {
-      cookies().set("jwt", responseData.jwt, config);
-      redirectPath = `/dashboard`;
-    }
+    return {
+      ...prevState,
+      apiErrors: null,
+      zodErrors: null,
+      message: "Registro exitoso",
+    };
   } catch (error) {
-    console.error("Login action error:", error);
+    console.error("Register action error:", error);
     throw error;
-  } finally {
-    if (redirectPath) {
-      redirect(redirectPath);
-    }
   }
 };

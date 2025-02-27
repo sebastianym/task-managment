@@ -1,5 +1,5 @@
 export const loginService = async (credentials: any) => {
-  const url = new URL("/api/login", process.env.NEXT_PUBLIC_BACKEND_URL);
+  const url = new URL("/api/auth/login", process.env.NEXT_PUBLIC_BACKEND_URL);
 
   try {
     const response = await fetch(url, {
