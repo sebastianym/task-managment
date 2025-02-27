@@ -1,34 +1,30 @@
-import { getAuthToken } from "@/data/services/getToken";
+import { getAuthToken } from "./getToken";
 
-interface fetchGETProps {
+interface fetchPOSTProps<T> {
     url: string;
+    body: T;
     error: string;
 }
 
-export async function fetchGET<T = any>(props: fetchGETProps): Promise<T> {
-
+export async function fetchPOST<T, R = any>(props: fetchPOSTProps<T>): Promise<R> {
     const url = new URL(props.url, process.env.NEXT_PUBLIC_BACKEND_URL);
-
     const authToken = await getAuthToken();
-    
+
     try {
         const response = await fetch(url, {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${authToken}`,
             },
+            body: JSON.stringify(props.body),
             cache: "no-cache",
         });
-
-        if (!response.ok) {
-            throw new Error(`Error ${response.status}: ${props.error}`);
-        }
 
         return await response.json();
 
     } catch (error) {
-        console.log(props.error, error);
+        console.error(props.error, error);
         throw error;
     }
 }
