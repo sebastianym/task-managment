@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { es } from "date-fns/locale";
+import { es } from "date-fns/locale/es";
 import { Calendar, Edit, MoreHorizontal, Tag, Trash } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,13 +20,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Task } from "@/lib/types/Task";
-
-interface TaskListProps {
-  tasks: Task[];
-  onDelete: (id: string) => void;
-  onToggleCompleted: (id: string) => void;
-  onEdit: (id: string, updatedTask: Partial<Task>) => void;
-}
+import { TaskListProps } from "@/lib/types/TaskListProps";
+import { TaskForm } from "./TaskForm";
 
 export function TaskList({
   tasks,
@@ -169,16 +164,18 @@ export function TaskList({
         </Card>
       ))}
 
-      {/* Modal para editar tarea */}
-      {/* {editingTaskId && (
-        // <TaskForm
-        //   isOpen={!!editingTaskId}
-        //   onClose={() => setEditingTaskId(null)}
-        //   onSubmit={(updatedTask) => handleEditSubmit(editingTaskId, updatedTask)}
-        //   initialData={tasks.find((task) => task.id === editingTaskId)}
-        //   isEditing
-        // />
-      )} */}
+      {/* Modal para editar o crear tarea */}
+      {editingTaskId && (
+        <TaskForm
+          isOpen={!!editingTaskId}
+          onClose={() => setEditingTaskId(null)}
+          onSubmit={(updatedTask) =>
+            handleEditSubmit(editingTaskId, updatedTask)
+          }
+          initialData={tasks.find((task) => task.id === editingTaskId)}
+          isEditing
+        />
+      )}
     </div>
   );
 }

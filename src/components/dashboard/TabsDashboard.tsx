@@ -8,31 +8,17 @@ import { toast } from "sonner";
 function TabsDashboard({ tasks }: { tasks: Task[] }) {
   const [activeFilter, setActiveFilter] = useState<"all" | Priority>("all");
   const [isAddingTask, setIsAddingTask] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
 
-  // Filtrar tareas según la prioridad seleccionada y búsqueda
-  const filteredTasks = tasks
-    .filter((task) => activeFilter === "all" || task.priority === activeFilter)
-    .filter(
-      (task) =>
-        task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        task.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        task.category.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+  // Filtrar tareas según la prioridad seleccionada
+  const filteredTasks = tasks.filter(
+    (task) => activeFilter === "all" || task.priority === activeFilter
+  );
 
   // Añadir nueva tarea
   const addTask = (
-    task: Omit<Task, "id" | "createdAt" | "favorite" | "completed">
+    task: Omit<Task, "id" | "createdAt" | "updatedAt" | "userId">
   ) => {
-    const newTask: Task = {
-      ...task,
-      id: Math.random().toString(36).substring(2, 9),
-      createdAt: new Date(),
-      completed: false,
-    };
-
     setIsAddingTask(false);
-
     toast.success("La tarea se ha creado exitosamente");
   };
 

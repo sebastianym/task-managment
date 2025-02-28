@@ -3,40 +3,69 @@ import StatsDashboard from "@/components/dashboard/StatsDashboard";
 import TabsDashboard from "@/components/dashboard/TabsDashboard";
 import { TaskStats } from "@/components/task/TaskStats";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { LoaderCircle, Plus } from "lucide-react";
 import { getTasksService } from "@/data/services/task/getTasksService";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Task } from "@/lib/types/Task";
 
-function Dashboard() {
+function Dashboard({ params }: { params: { filter: string } }) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [tasksCompleted, setTasksCompleted] = useState<Task[]>([]);
   const [tasksPending, setTasksPending] = useState<Task[]>([]);
   const [tasksHighPriority, setTasksHighPriority] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getTasksService();
-        console.log(data);
-        const completedTasks = data.filter((task: Task) => task.completed);
-        const pendingTasks = data.filter((task: Task) => !task.completed);
-        const highPriorityTasks = data.filter(
+        let filteredTasks = data;
+
+        if (params.filter === "completed") {
+          filteredTasks = data.filter((task: Task) => task.completed);
+        } else if (params.filter === "pending") {
+          filteredTasks = data.filter((task: Task) => !task.completed);
+        } else if (params.filter === "delayed") {
+          const currentDate = new Date();
+          filteredTasks = data.filter(
+            (task: Task) =>
+              !task.completed && new Date(task.due_date) < currentDate
+          );
+        }
+
+        const completedTasks = filteredTasks.filter(
+          (task: Task) => task.completed
+        );
+        const pendingTasks = filteredTasks.filter(
+          (task: Task) => !task.completed
+        );
+        const highPriorityTasks = filteredTasks.filter(
           (task: Task) => task.priority === "high"
         );
 
-        setTasks(data);
+        setTasks(filteredTasks);
         setTasksCompleted(completedTasks);
         setTasksPending(pendingTasks);
         setTasksHighPriority(highPriorityTasks);
       } catch (error) {
         toast.error("Error al traer las tareas");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex h-full flex-col justify-center items-center animate-pulse">
+        <LoaderCircle size={26} className="mr-2 text-white animate-spin mb-5" />
+        <p className="text-black/80">Cargando tareas...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-4 md:p-6 max-w-7xl">

@@ -53,7 +53,7 @@ export const loginAction = async (prevState: any, formData: FormData) => {
 
     if (responseData.jwt) {
       cookies().set("jwt", responseData.jwt, config);
-      redirectPath = `/dashboard`;
+      redirectPath = `/dashboard/all`;
     }
   } catch (error) {
     console.error("Login action error:", error);

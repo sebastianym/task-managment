@@ -1,3 +1,4 @@
+"use client";
 import { ThemeProvider } from "@/components/custom/ThemeProvider";
 import {
   Calendar,
@@ -10,12 +11,19 @@ import {
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeButton } from "@/components/custom/ThemeButton";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const isAllTasks = pathname === "/dashboard/all";
+  const isCompletedTasks = pathname === "/dashboard/completed";
+  const isPendingTasks = pathname === "/dashboard/pending";
+  const isDelayedTasks = pathname === "/dashboard/delayed";
   return (
     <ThemeProvider
       attribute="class"
@@ -47,20 +55,41 @@ export default function Layout({
                   <div className="grid gap-3 px-2">
                     <Button
                       variant="ghost"
-                      className="justify-start gap-3 bg-muted"
+                      className={`justify-start gap-3 ${
+                        isAllTasks ? "bg-muted" : ""
+                      }`}
+                      onClick={() => router.push("/dashboard/all")}
                     >
                       <Calendar className="h-5 w-5" />
                       Todas las tareas
                     </Button>
-                    <Button variant="ghost" className="justify-start gap-3">
+                    <Button
+                      variant="ghost"
+                      className={`justify-start gap-3 ${
+                        isCompletedTasks ? "bg-muted" : ""
+                      }`}
+                      onClick={() => router.push("/dashboard/completed")}
+                    >
                       <CalendarCheck className="h-5 w-5" />
                       Tareas completadas
                     </Button>
-                    <Button variant="ghost" className="justify-start gap-3">
+                    <Button
+                      variant="ghost"
+                      className={`justify-start gap-3 ${
+                        isPendingTasks ? "bg-muted" : ""
+                      }`}
+                      onClick={() => router.push("/dashboard/pending")}
+                    >
                       <CalendarClock className="h-5 w-5" />
                       Tareas Pendientes
                     </Button>
-                    <Button variant="ghost" className="justify-start gap-3">
+                    <Button
+                      variant="ghost"
+                      className={`justify-start gap-3 ${
+                        isDelayedTasks ? "bg-muted" : ""
+                      }`}
+                      onClick={() => router.push("/dashboard/delayed")}
+                    >
                       <CalendarX2 className="h-4 w-4" />
                       Tareas Retrasadas
                     </Button>
@@ -74,7 +103,10 @@ export default function Layout({
             </div>
             <div className="ml-auto flex items-center gap-2">
               <ThemeButton />
-              <Button variant="ghost" className="w-full justify-start gap-2 p-0">
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-2 p-0"
+              >
                 <LogOut className="h-5 w-5" />
                 Cerrar sesión
               </Button>
@@ -93,20 +125,41 @@ export default function Layout({
               <nav className="grid gap-1 pt-2">
                 <Button
                   variant="ghost"
-                  className="justify-start gap-3 bg-muted"
+                  className={`justify-start gap-3 ${
+                    isAllTasks ? "bg-muted" : ""
+                  }`}
+                  onClick={() => router.push("/dashboard/all")}
                 >
                   <Calendar className="h-4 w-4" />
                   Todas las tareas
                 </Button>
-                <Button variant="ghost" className="justify-start gap-3">
+                <Button
+                  variant="ghost"
+                  className={`justify-start gap-3 ${
+                    isCompletedTasks ? "bg-muted" : ""
+                  }`}
+                  onClick={() => router.push("/dashboard/completed")}
+                >
                   <CalendarCheck className="h-4 w-4" />
                   Tareas completadas
                 </Button>
-                <Button variant="ghost" className="justify-start gap-3">
+                <Button
+                  variant="ghost"
+                  className={`justify-start gap-3 ${
+                    isPendingTasks ? "bg-muted" : ""
+                  }`}
+                  onClick={() => router.push("/dashboard/pending")}
+                >
                   <CalendarClock className="h-4 w-4" />
                   Tareas Pendientes
                 </Button>
-                <Button variant="ghost" className="justify-start gap-3">
+                <Button
+                  variant="ghost"
+                  className={`justify-start gap-3 ${
+                    isDelayedTasks ? "bg-muted" : ""
+                  }`}
+                  onClick={() => router.push("/dashboard/delayed")}
+                >
                   <CalendarX2 className="h-4 w-4" />
                   Tareas Retrasadas
                 </Button>
@@ -114,9 +167,7 @@ export default function Layout({
             </div>
           </aside>
           {/* Contenido */}
-          <main className="flex-1 overflow-auto">
-              {children}
-          </main>
+          <main className="flex-1 overflow-auto">{children}</main>
         </div>
       </div>
     </ThemeProvider>
