@@ -1,16 +1,15 @@
 import { fetchPOST } from "../fetchPOST";
 
-interface Task {
+interface TaskCompleted {
   id: string;
-  title: string;
-  description: string;
-  dueDate: string;
-  priority: string;
-  category: string;
+  completed: boolean;
 }
 
-export const updateTaskService = async (task: Task) => {
-  const url = new URL("/api/task/update", process.env.NEXT_PUBLIC_BACKEND_URL);
+export const updateTaskCompletedService = async (task: TaskCompleted) => {
+  const url = new URL(
+    "/api/task/updateCompleted",
+    process.env.NEXT_PUBLIC_BACKEND_URL
+  );
 
   try {
     const responseData = await fetchPOST({

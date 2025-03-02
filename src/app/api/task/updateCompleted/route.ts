@@ -11,8 +11,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id, title, description, dueDate, priority, completed, category } =
-      await request.json();
+    const { id, completed } = await request.json();
 
     const validateTask = await prisma.task.findUnique({
       where: {
@@ -36,12 +35,7 @@ export async function POST(request: Request) {
 
     const updatedTask = await prisma.task.update({
       data: {
-        title,
-        description,
-        due_date: dueDate,
-        priority,
         completed,
-        category,
       },
       where: {
         id: Number(id),

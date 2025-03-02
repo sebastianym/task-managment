@@ -6,7 +6,7 @@ export const deleteTaskService = async (id: number) => {
   try {
     const responseData = await fetchPOST({
       url: url.toString(),
-      body: JSON.stringify({ id }),
+      body: {id},
       error: "Error al eliminar la tarea.",
     });
 

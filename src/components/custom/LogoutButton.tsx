@@ -8,7 +8,7 @@ export function LogoutButton() {
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/logout", { method: "GET" });
+      await fetch("/api/auth/logout", { method: "GET" });
     } catch (error) {
       console.error("Error during logout", error);
     }

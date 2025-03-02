@@ -4,8 +4,15 @@ import { TaskList } from "../task/TaskList";
 import { useState } from "react";
 import { Priority, Task } from "@/lib/types/Task";
 import { toast } from "sonner";
+import { deleteTaskService } from "@/data/services/task/deleteTaskService";
+import { updateTaskCompletedService } from "@/data/services/task/updateCompletedTask";
 
-function TabsDashboard({ tasks }: { tasks: Task[] }) {
+interface TabsDashboardProps {
+  tasks: Task[];
+  onTaskChanged: () => void;
+}
+
+function TabsDashboard({ tasks, onTaskChanged }: TabsDashboardProps) {
   const [activeFilter, setActiveFilter] = useState<"all" | Priority>("all");
   const [isAddingTask, setIsAddingTask] = useState(false);
 
@@ -14,30 +21,36 @@ function TabsDashboard({ tasks }: { tasks: Task[] }) {
     (task) => activeFilter === "all" || task.priority === activeFilter
   );
 
-  // Añadir nueva tarea
-  const addTask = (
-    task: Omit<Task, "id" | "createdAt" | "updatedAt" | "userId">
-  ) => {
-    setIsAddingTask(false);
-    toast.success("La tarea se ha creado exitosamente");
-  };
-
-  // Eliminar tarea
   const deleteTask = (id: string) => {
-    toast.success("La tarea se ha eliminado exitosamente");
-  };
-
-  // Marcar como completada
-  const toggleCompleted = (id: string) => {
-    const taskToUpdate = tasks.find((task) => task.id === id);
-    if (taskToUpdate && !taskToUpdate.completed) {
-      toast.success("Has completado una tarea exitosamente");
+    try {
+      deleteTaskService(Number(id));
+      toast.success("La tarea se ha eliminado exitosamente");
+      onTaskChanged();
+    } catch (error) {
+      toast.error("Ocurrió un error al eliminar la tarea.");
     }
   };
 
-  // Editar tarea
-  const editTask = (id: string, updatedTask: Partial<Task>) => {
+  const toggleCompleted = (id: string) => {
+    try {
+      const taskToUpdate = tasks.find((task) => task.id === id);
+      if (taskToUpdate) {
+        updateTaskCompletedService({ id, completed: !taskToUpdate.completed });
+        if (taskToUpdate.completed) {
+          toast.success("Has desmarcado una tarea exitosamente");
+        } else {
+          toast.success("Has completado una tarea exitosamente");
+        }
+        onTaskChanged();
+      }
+    } catch (error) {
+      toast.error("Ocurrió un error al completar o desmarcar la tarea.");
+    }
+  };
+
+  const editTask = () => {
     toast.success("La tarea se ha actualizado exitosamente");
+    onTaskChanged();
   };
 
   return (

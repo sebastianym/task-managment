@@ -65,14 +65,14 @@ export function TaskList({
           }`}
         >
           <CardHeader className="p-4 pb-0">
-            <div className="flex items-start gap-3">
+            <div className="flex items-center gap-3">
               <Checkbox
                 checked={task.completed}
                 onCheckedChange={() => onToggleCompleted(task.id)}
-                className="mt-1 rounded-full"
+                className="rounded-full"
               />
               <div className="flex-1 space-y-1">
-                <div className="flex items-start justify-between">
+                <div className="flex items-center justify-between gap-2">
                   <h3
                     className={`font-medium ${
                       task.completed ? "line-through text-muted-foreground" : ""
@@ -169,9 +169,7 @@ export function TaskList({
         <TaskForm
           isOpen={!!editingTaskId}
           onClose={() => setEditingTaskId(null)}
-          onSubmit={(updatedTask) =>
-            handleEditSubmit(editingTaskId, updatedTask)
-          }
+          onSuccess={() => handleEditSubmit(editingTaskId, {})}
           initialData={tasks.find((task) => task.id === editingTaskId)}
           isEditing
         />

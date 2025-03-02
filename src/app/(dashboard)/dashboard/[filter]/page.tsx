@@ -8,6 +8,7 @@ import { getTasksService } from "@/data/services/task/getTasksService";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Task } from "@/lib/types/Task";
+import { TaskForm } from "@/components/task/TaskForm";
 
 function Dashboard({ params }: { params: { filter: string } }) {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -15,10 +16,15 @@ function Dashboard({ params }: { params: { filter: string } }) {
   const [tasksPending, setTasksPending] = useState<Task[]>([]);
   const [tasksHighPriority, setTasksHighPriority] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
+  const [reload, setReload] = useState(0);
+  const [createTask, setCreateTask] = useState(false);
+  // Función para forzar refrescar las tareas
+  const refreshTasks = () => setReload((prev) => prev + 1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const data = await getTasksService();
         let filteredTasks = data;
 
@@ -57,13 +63,15 @@ function Dashboard({ params }: { params: { filter: string } }) {
     };
 
     fetchData();
-  }, []);
+  }, [reload, params.filter]);
 
   if (loading) {
     return (
       <div className="flex h-full flex-col justify-center items-center animate-pulse">
-        <LoaderCircle size={26} className="mr-2 text-white animate-spin mb-5" />
-        <p className="text-black/80">Cargando tareas...</p>
+        <LoaderCircle
+          size={26}
+          className="mr-2 dark:text-white text-black animate-spin mb-5"
+        />
       </div>
     );
   }
@@ -79,7 +87,10 @@ function Dashboard({ params }: { params: { filter: string } }) {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button className="md:flex gap-2 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 px-4 py-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white">
+          <Button
+            onClick={() => setCreateTask(true)}
+            className="md:flex gap-2 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 px-4 py-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+          >
             <Plus className="h-4 w-4" />
             Nueva tarea
           </Button>
@@ -96,7 +107,7 @@ function Dashboard({ params }: { params: { filter: string } }) {
 
       {/* Lista de tareas */}
       <div className="grid md:grid-cols-3 gap-6">
-        <TabsDashboard tasks={tasks} />
+        <TabsDashboard tasks={tasks} onTaskChanged={refreshTasks} />
         <div>
           <TaskStats
             totalTasks={tasks.length}
@@ -106,6 +117,15 @@ function Dashboard({ params }: { params: { filter: string } }) {
           />
         </div>
       </div>
+      {/* Modal para editar o crear tarea */}
+      {createTask && (
+        <TaskForm
+          isOpen={createTask}
+          onClose={() => setCreateTask(false)}
+          onSuccess={() => refreshTasks()}
+          isEditing={false}
+        />
+      )}
     </div>
   );
 }

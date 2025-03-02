@@ -1,12 +1,20 @@
 import { fetchPOST } from "../fetchPOST";
 
-export const createTaskService = async (id: number) => {
+interface Task {
+  title: string;
+  description: string;
+  dueDate: string;
+  priority: string;
+  category: string;
+}
+
+export const createTaskService = async (task: Task) => {
   const url = new URL("/api/task/create", process.env.NEXT_PUBLIC_BACKEND_URL);
 
   try {
     const responseData = await fetchPOST({
       url: url.toString(),
-      body: JSON.stringify({ id }),
+      body: task,
       error: "Error al crear la tarea.",
     });
 

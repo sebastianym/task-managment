@@ -11,14 +11,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { title, description, due_date, priority, category } =
+    const { title, description, dueDate, priority, category } =
       await request.json();
 
     const createdTask = await prisma.task.create({
       data: {
         title,
         description,
-        due_date,
+        due_date: dueDate,
         priority,
         category,
         user: {
