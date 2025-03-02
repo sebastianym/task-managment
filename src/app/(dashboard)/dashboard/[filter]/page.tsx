@@ -50,6 +50,7 @@ function Dashboard({ params }: { params: { filter: string } }) {
         setTasksHighPriority(highPriorityTasks);
       } catch (error) {
         toast.error("Error al traer las tareas");
+        console.log(error);
       } finally {
         setLoading(false);
       }

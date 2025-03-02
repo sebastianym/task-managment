@@ -5,13 +5,13 @@ import {
   CalendarCheck,
   CalendarClock,
   CalendarX2,
-  LogOut,
   Menu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeButton } from "@/components/custom/ThemeButton";
 import { useRouter, usePathname } from "next/navigation";
+import { LogoutButton } from "@/components/custom/LogoutButton";
 
 export default function Layout({
   children,
@@ -103,13 +103,8 @@ export default function Layout({
             </div>
             <div className="ml-auto flex items-center gap-2">
               <ThemeButton />
-              <Button
-                variant="ghost"
-                className="w-full justify-start gap-2 p-0"
-              >
-                <LogOut className="h-5 w-5" />
-                Cerrar sesión
-              </Button>
+
+              <LogoutButton />
             </div>
           </div>
         </header>

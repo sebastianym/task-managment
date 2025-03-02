@@ -1,7 +1,6 @@
 "use client";
 import RegisterForm from "@/components/auth/RegisterForm";
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 function RegisterPage() {
