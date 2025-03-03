@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **Task Manager**
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+Este proyecto consiste en el desarrollo de un Task Manager que permite gestionar tareas de manera eficiente. Los usuarios pueden crear, editar, eliminar y filtrar tareas a través de una interfaz sencilla. El sistema está respaldado por una base de datos PostgreSQL y una API REST que facilita la interacción con las tareas.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+El objetivo de este proyecto es aplicar y mejorar mis habilidades en desarrollo web y gestión de bases de datos.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Instalación
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clona el repositorio:**
 
-## Learn More
+  ```bash
+  git clone https://github.com/sebastianym/e-commerce-fis.git
+  ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Instala las dependencias y ejecuta el proyecto::
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  ```bash
+  npm install
+  npm run dev
+  ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Una vez iniciado, el servidor se ejecutará en http://localhost:3000.
 
-## Deploy on Vercel
+## Capturas de pantalla
+Algunas capturas de pantalla del proyecto 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![image](https://github.com/user-attachments/assets/860afd2e-549b-4738-a70d-c8f278406d9d)
+
+
+![image](https://github.com/user-attachments/assets/d95cd97b-fa80-4d8e-81a9-f2651069974f)
+
+
+![image](https://github.com/user-attachments/assets/8346ec19-33e8-47b4-a5d9-e37a1906ba19)
+
+
+## Colaboradores
+
+[Sebastián Yepes]
