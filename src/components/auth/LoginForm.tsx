@@ -36,7 +36,7 @@ function LoginForm() {
           type="email"
           autoCorrect="off"
           placeholder="correo@correo.com"
-          className="w-full"
+          className="w-full dark:text-black/80"
         />
         <ZodErrors error={formState?.zodErrors?.email} />
       </div>
@@ -54,7 +54,7 @@ function LoginForm() {
             name="password"
             type={showPassword ? "text" : "password"}
             placeholder="Ingresa tu contraseña"
-            className="w-full pr-10"
+            className="w-full pr-10 dark:text-black/80"
           />
           <Button
             type="button"

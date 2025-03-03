@@ -54,7 +54,7 @@ function RegisterForm() {
           name="firstName"
           placeholder="Primer Nombre"
           type="text"
-          className="w-full"
+          className="w-full dark:text-black/80"
         />
         <ZodErrors error={formState?.zodErrors?.firstName} />
       </div>
@@ -70,7 +70,7 @@ function RegisterForm() {
           name="lastName"
           placeholder="Primer Apellido"
           type="text"
-          className="w-full"
+          className="w-full dark:text-black/80"
         />
         <ZodErrors error={formState?.zodErrors?.lastName} />
       </div>
@@ -86,7 +86,7 @@ function RegisterForm() {
           name="email"
           placeholder="correo@correo.com"
           type="email"
-          className="w-full"
+          className="w-full dark:text-black/80"
         />
         <ZodErrors error={formState?.zodErrors?.email} />
       </div>
@@ -103,7 +103,7 @@ function RegisterForm() {
             name="password"
             type={showPassword ? "text" : "password"}
             placeholder="Ingresa tu contraseña"
-            className="w-full"
+            className="w-full dark:text-black/80"
           />
           <Button
             type="button"
@@ -137,7 +137,7 @@ function RegisterForm() {
             name="passwordConfirmation"
             type={showConfirmPassword ? "text" : "password"}
             placeholder="Ingresa tu contraseña"
-            className="w-full"
+            className="w-full dark:text-black/80"
           />
           <Button
             type="button"

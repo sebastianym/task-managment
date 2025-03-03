@@ -9,13 +9,13 @@ function LoginPage() {
       {/* Columna de imagen */}
       <div className="hidden lg:block lg:w-1/2 relative">
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src="/img/fondo.png"
           alt="Imagen iniciar sesión"
           layout="fill"
           objectFit="cover"
-          className="brightness-75"
+          className="brightness-[0.4] object-cover w-full h-full"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-indigo-900/50" />
+        <div className="absolute inset-0" />
         <div className="absolute bottom-0 left-0 p-12 text-white">
           <h2 className="text-4xl font-bold mb-4">Bienvenido de vuelta</h2>
           <p className="text-xl">

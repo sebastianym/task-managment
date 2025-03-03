@@ -9,13 +9,13 @@ function RegisterPage() {
       {/* Columna de imagen */}
       <div className="hidden lg:flex lg:w-1/2 relative">
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src="/img/fondo.png"
           alt="Imagen registro"
           layout="fill"
           objectFit="cover"
-          className="brightness-75"
+          className="brightness-[0.4] object-cover w-full h-full"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-indigo-900/50" />
+        <div className="absolute inset-0" />
         <div className="absolute bottom-0 left-0 p-12 text-white z-10">
           <h2 className="text-5xl font-bold mb-4">Organiza tu vida</h2>
           <p className="text-2xl">
