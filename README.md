@@ -13,7 +13,7 @@ Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
 1. **Clona el repositorio:**
 
   ```bash
-  git clone https://github.com/sebastianym/e-commerce-fis.git
+  git clone https://github.com/sebastianym/task-managment.git
   ```
 
 2. Instala las dependencias y ejecuta el proyecto::
